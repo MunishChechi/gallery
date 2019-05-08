@@ -34,7 +34,26 @@
 			  var map = new google.maps.Map(
 			      document.getElementById('map'), {zoom: 4, center: uluru});
 			  // The marker, positioned at Uluru
-			  var marker = new google.maps.Marker({position: uluru, map: map, animation:google.maps.Animation.BOUNCE});
+			  // var marker = new google.maps.Marker({position: uluru, map: map, animation:google.maps.Animation.BOUNCE});
+
+			  var contentString = '<div><img style="height:100px;width:150px;" src="<?php echo base_url() ?>uploads/<?php echo $image['image_name']; ?>" /></div>';
+
+			  var infowindow = new google.maps.InfoWindow({
+			    content: contentString
+			  });
+
+			  var marker = new google.maps.Marker({
+			    position: uluru,
+			    map: map,
+			    title: '<?php echo $image['image_name']; ?>',
+			    animation:google.maps.Animation.BOUNCE
+			  });
+			  marker.addListener('mouseover', function() {
+			    infowindow.open(map, marker);
+			  });
+			  marker.addListener('mouseout', function() {
+			    infowindow.close();
+			  });
 			}
    		</script>
     
