@@ -24,43 +24,36 @@
 
         
 
-		<script>
-			
+	<script>
 
-			function initMap() {
-			  // The location of Uluru
-			  var uluru = {lat: <?php echo $image['lattitude']; ?>, lng: <?php echo $image['longitude']; ?>};
-			  // The map, centered at Uluru
-			  var map = new google.maps.Map(
-			      document.getElementById('map'), {zoom: 4, center: uluru});
-			  // The marker, positioned at Uluru
-			  // var marker = new google.maps.Marker({position: uluru, map: map, animation:google.maps.Animation.BOUNCE});
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: {lat: <?=$image['lattitude'];?>, lng: <?=$image['longitude'];?>},
+          mapTypeId: 'terrain'
+        });
 
-			  var contentString = '<div><img style="height:100px;width:150px;" src="<?php echo base_url() ?>uploads/<?php echo $image['image_name']; ?>" /></div>';
+         var contentString = '<div><img style="height:100px;width:150px;" src="<?php echo base_url() ?>uploads/<?php echo $image['image_name']; ?>" /></div>';
 
-			  var infowindow = new google.maps.InfoWindow({
+         var infowindow = new google.maps.InfoWindow({
 			    content: contentString
 			  });
 
-			  var marker = new google.maps.Marker({
-			    position: uluru,
-			    map: map,
-			    title: '<?php echo $image['image_name']; ?>',
-			    animation:google.maps.Animation.BOUNCE
-			  });
-			  marker.addListener('mouseover', function() {
-			    infowindow.open(map, marker);
-			  });
-			  marker.addListener('mouseout', function() {
-			    infowindow.close();
-			  });
-			}
-   		</script>
-    
+        var uluru = {lat: <?=$image['lattitude'];?>, lng: <?=$image['longitude'];?>};
+        var marker = new google.maps.Marker({position: uluru, map: map});
 
+        marker.addListener('mouseover', function() {
+		    infowindow.open(map, marker);
+		});
+		marker.addListener('mouseout', function() {
+		    infowindow.close();
+		});
+
+      
+      }
+    </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWjP8cpLzGS24nN92UFu72-h26ZRG4KbM&callback=initMap"></script>
-		     
-
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnSuXiQiqR9-J-4v3Exc95VyPjqCTq4ns&callback=initMap">
+    </script>
     </body>
 </html>
